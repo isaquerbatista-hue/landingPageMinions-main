@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hop Spot</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <img src="/img/logo.png" alt="logo" class="logo" />
+      <nav>
+        <ul class="links">
+          <li><h1 class="link1">Início</h1></li>
+          <li><h1 class="link2">Planos</h1></li>
+          <li><h1 class="link3">Atrações</h1></li>
+          <li><h1 class="link4">Parques</h1></li>
+          <li><h1 class="link5">Contato</h1></li>
+        </ul>
+      </nav>
+      <div class="icones">
+        <img src="/img/icones/account.png" alt="icone" class="icone" />
+        <img src="/img/icones/config.png" alt="icone" class="icone" />
+      </div>
+    </header>
+    <main class="main">
+      <div class="oferta">
+        <p class="oferta-texto">
+          Desconto de 20% na compra de ingressos para menores de 15 anos💫❗
+        </p>
+      </div>
+      <div class="carousel-container" id="carousel-container">
+        <button class="nav-btn prev" id="prevBtn">&#10094;</button>
+        <button class="nav-btn next" id="nextBtn">&#10095;</button>
+
+        <div class="carousel-track" id="track">
+          <div class="slide">
+            <img
+              src="/img/carousel/slide1.jpg"
+              alt="Minion Gigante no Shopping"
+            />
+            <div class="slide-content">
+              <h2>Venha se Divertir Com os Minions</h2>
+              <a href="#" class="btn-cta">
+                <i class="fas fa-ticket-alt"></i>
+                Checkar ingressos🎟️
+              </a>
+            </div>
+          </div>
+
+          <div class="slide">
+            <img src="/img/carousel/slide2.jpg" alt="Minion Park Parade" />
+            <div class="slide-content">
+              <h2>Todas as parada Mágica no Minion Park!</h2>
+              <a href="#" class="btn-cta">
+                <i class="fas fa-camera"></i>
+                Ver Atrações🗼
+              </a>
+            </div>
+          </div>
+
+          <div class="slide">
+            <img src="/img/carousel/slide3.png" alt="Loja Minions" />
+            <div class="slide-content">
+              <h2>Tire suas dúvidas conosco</h2>
+              <a href="#" class="btn-cta">
+                <i class="fas fa-shopping-bag"></i>
+                Contato📞
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const track = document.getElementById("track");
+        const slides = Array.from(track.children);
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+
+        let currentIndex = 0;
+
+        // Função para mover o slide
+        function updateSlidePosition() {
+          // Move a trilha para a esquerda baseado no índice (0%, -100%, -200%)
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Botão Próximo
+        nextBtn.addEventListener("click", () => {
+          if (currentIndex < slides.length - 1) {
+            currentIndex++;
+          } else {
+            currentIndex = 0; // Volta para o primeiro (Loop)
+          }
+          updateSlidePosition();
+        });
+
+        // Botão Anterior
+        prevBtn.addEventListener("click", () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+          } else {
+            currentIndex = slides.length - 1; // Vai para o último
+          }
+          updateSlidePosition();
+        });
+
+        // --- LÓGICA DE TOUCH (PARA CELULAR) ---
+        // Como removemos o scroll nativo, precisamos recriar o "swipe" do dedo via JS
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const container = document.getElementById("carousel-container");
+
+        container.addEventListener("touchstart", (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        container.addEventListener("touchend", (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        });
+
+        function handleSwipe() {
+          // Se deslizou para a esquerda (Next)
+          if (touchStartX - touchEndX > 50) {
+            nextBtn.click();
+          }
+          // Se deslizou para a direita (Prev)
+          if (touchEndX - touchStartX > 50) {
+            prevBtn.click();
+          }
+        }
+      </script>
+      <hr />
+
+      <div class="caixa">
+        <h3>Patrocinado pelos Minions</h3>
+        <br />
+        <p>
+          Uma edição especial do Parque Aventura com áreas coloridas, atrações
+          interativas e experiências inspiradas no universo Minions.
+        </p>
+      </div>
+
+      <section class="atracoes-secao">
+        <h2>Atrações Especiais</h2>
+
+        <div class="cards-container">
+          <div class="card">
+            <img src="/img/atracoes/b.png" alt="Minions Show" />
+            <h4>Minions Show</h4>
+            <p>Espetáculo divertido com música e dança para todas as idades.</p>
+          </div>
+
+          <div class="card">
+            <img src="/img/atracoes/c.png" alt="Montanha Russa" />
+            <h4>Montanha-Russa Loop</h4>
+            <p>Curvas radicais, velocidade e muita diversão nas alturas.</p>
+          </div>
+
+          <div class="card">
+            <img src="/img/atracoes/a.png" alt="Carrinho Bate Bate" />
+            <h4>Carrinho bate-bate</h4>
+            <p>Experiência interativa cheia de surpresas e risadas.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="tickets-secao">
+        <h2>Ingressos</h2>
+
+        <div class="tickets-container">
+          <div class="ticket-card">
+            <span class="ticket-icon">🍌</span>
+            <h3>Minion</h3>
+            <p>Acesso completo por 1 dia</p>
+            <span class="ticket-preco">R$ 89,99</span>
+            <a href="#" class="btn-comprar">Comprar</a>
+          </div>
+
+          <div class="ticket-card principal">
+            <span class="ticket-icon">👨‍👩‍👧‍👦</span>
+            <h3>Família Minion</h3>
+            <p>Entrada para até 5 pessoas</p>
+            <span class="ticket-preco">R$ 299,99</span>
+            <a href="#" class="btn-comprar">Comprar</a>
+          </div>
+
+          <div class="ticket-card">
+            <span class="ticket-icon">👑</span>
+            <h3>VIP Minion</h3>
+            <p>Entrada para até 3 pessoas</p>
+            <span class="ticket-preco">R$ 169,99</span>
+            <a href="#" class="btn-comprar">Comprar</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="rodape">
+      <section class="mapa-secao-rodape">
+        <img src="/img/logo.png" alt="logo" class="logo-mapa" />
+        <h2>Localização</h2>
+
+        <div class="mapa-container">
+          <img src="/img/mapa.jpg" alt="Mapa do Parque" />
+        </div>
+      </section>
+      <section class="secao-rodape">
+        <div class="divisor-do-rodape"></div>
+        <div class="container-do-rodape">
+          <div class="esquerda-do-rodape">
+            <h3>Contate-nos</h3>
+            <div class="contato">
+              <span>MinionsParkofc@gmail.com</span>
+            </div>
+            <div class="contato">
+              <span>(55) 11 96152-0490</span>
+            </div>
+          </div>
+
+          <div class="centro-do-rodape">
+            <h3>Atalhos</h3>
+            <a href="#" class="link-atalho">Início</a>
+            <a href="#" class="link-atalho">Planos</a>
+            <a href="#" class="link-atalho">Atrações</a>
+            <a href="#" class="link-atalho">Parques</a>
+          </div>
+
+          <div class="direita-do-rodape">
+            <h3>Dúvidas</h3>
+            <a href="#" class="duvidas">Como comprar os ingressos?</a>
+          </div>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
